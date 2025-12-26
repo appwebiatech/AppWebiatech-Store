@@ -862,11 +862,11 @@
             const container = document.getElementById('reviewsContainer');
             container.innerHTML = "<div style='text-align:center; padding:10px;'>Memuat ulasan...</div>";
 
-            db.collection('reviews')
-              .where("appId", "==", appId)
-              .orderBy("timestamp", "desc")
-              .limit(10)
-              .get()
+db.collection('reviews')
+  .where("appId", "==", appId)
+  // Baris orderBy saya hapus dulu biar tidak perlu setting Index
+  .limit(10)
+  .get()
               .then((querySnapshot) => {
                   container.innerHTML = "";
                   let totalRating = 0;
@@ -968,3 +968,4 @@
     </script>
 </body>
     </html>
+
