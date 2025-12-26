@@ -445,7 +445,7 @@
                 <div class="modal-title">Dukungan Aplikasi</div>
                 <div class="info-row">
                     <span class="info-label">Versi</span>
-                    <span class="info-value">1.0.2</span>
+                    <span class="info-value" id="detailVersion">1.0.0</span>
                 </div>
                 <div class="info-row">
                     <span class="info-label">Diupdate pada</span>
@@ -509,16 +509,15 @@
 
     <script>
         // --- KONFIGURASI FIREBASE ---
-        // GANTI BAGIAN INI DENGAN DATA DARI FIREBASE CONSOLE ANDA
-const firebaseConfig = {
-    apiKey: "AIzaSyA0TBdtRRWAtpiKlAtH_6O9BeUZzqO-dzs",
-    authDomain: "appwebiatech-store.firebaseapp.com",
-    projectId: "appwebiatech-store",
-    storageBucket: "appwebiatech-store.firebasestorage.app",
-    messagingSenderId: "832935810880",
-    appId: "1:832935810880:web:749fe7e64204394751cca5",
-    measurementId: "G-8R98K3KB2L"
-  };
+        const firebaseConfig = {
+            apiKey: "AIzaSyA0TBdtRRWAtpiKlAtH_6O9BeUZzqO-dzs",
+            authDomain: "appwebiatech-store.firebaseapp.com",
+            projectId: "appwebiatech-store",
+            storageBucket: "appwebiatech-store.firebasestorage.app",
+            messagingSenderId: "832935810880",
+            appId: "1:832935810880:web:749fe7e64204394751cca5",
+            measurementId: "G-8R98K3KB2L"
+        };
 
         // Inisialisasi Firebase
         let db;
@@ -584,7 +583,7 @@ const firebaseConfig = {
         }
 
         // --- DATA APLIKASI ---
-        // PERUBAHAN: Menambahkan property 'lastUpdated' untuk setiap item
+        // PERUBAHAN: Menambahkan property 'version' untuk setiap item
         const appDB = {
             'zikirnur': {
                 id: 'zikirnur',
@@ -593,12 +592,13 @@ const firebaseConfig = {
                 desc: 'Aplikasi islami lengkap dengan notifikasi Adzan, Dzikir Harian, Tasbih Digital, Arah Kiblat, & Al-Quran Offline.',
                 email: 'support@zikirnur.com',
                 policy: 'Hanya menggunakan lokasi untuk jadwal sholat.',
-                link: 'https://mediafire.com/file/3mfxhg5j6w0a8b7',
+                link: 'https://www.mediafire.com/file/3mfxhg5j6w0a8b7/ZikurNur.apk/file',
                 tags: ['popular', 'lifestyle'],
                 defaultDownloads: 0, 
                 btnText: 'Install',
                 isPremium: false,
-                lastUpdated: '15 Januari 2025' // TANGGAL KHUSUS ZIKIR NUR
+                lastUpdated: '15 Januari 2025',
+                version: '1.2.0(27)' // VERSI ZIKIR NUR
             },
             'kalkulator': {
                 id: 'kalkulator',
@@ -607,32 +607,34 @@ const firebaseConfig = {
                 desc: 'Aplikasi kalkulator pintar dengan antarmuka modern. Mendukung perhitungan aritmatika dasar, mode Ilmiah, dan Pengonversi satuan.',
                 email: 'tools@appwebiatech.com',
                 policy: 'Bekerja offline, tanpa tracking.',
-                link: 'https://mediafire.com/file/84gzenmyza0w4d3',
+                link: 'https://www.mediafire.com/file/84gzenmyza0w4d3/Kalkulator.apk/file',
                 tags: ['popular', 'productivity'],
                 defaultDownloads: 0, 
                 btnText: 'Install',
                 isPremium: false,
-                lastUpdated: '15 November 2025' // TANGGAL KHUSUS KALKULATOR
+                lastUpdated: '15 November 2025',
+                version: '1.0' // VERSI KALKULATOR
             },
             'smartdkm': {
                 id: 'smartdkm',
                 title: 'Smart DKM',
                 icon: 'SmartDKM.png',
-                desc: 'Smart DKM adalah aplikasi berbasis web (Web App) yang dirancang sebagai papan informasi digital (Digital Signage) dan manajemen administrasi untuk masjid. Aplikasi ini bersifat Hybrid (Online & Offline), artinya data disimpan secara lokal di perangkat (HP/Tablet/Smart TV) namun memiliki fitur Cloud Sync (menggunakan Firebase) agar admin dapat mengupdate data dari jarak jauh dan data tersebut otomatis berubah di layar masjid atau HP jamaah.',
+                desc: 'Sistem Manajemen Masjid berbasis Web & Android (Hybrid).',
                 email: 'dkm@appwebiatech.com',
                 policy: 'Data keuangan aman di server Firebase.',
-                link: 'https://mediafire.com/file/lq9jc3feplrfqvl',
+                link: 'https://www.mediafire.com/file/7uwlyxkftrptwqf/Smart+DKM.apk/file',
                 tags: ['productivity'],
                 defaultDownloads: 0, 
                 btnText: 'Install',
                 isPremium: false,
-                lastUpdated: '24 Desember 2025'
+                lastUpdated: '26 Desember 2025',
+                version: '2.99.5' // VERSI SMART DKM
             },
             'wifimonitor': {
                 id: 'wifimonitor',
                 title: 'Wifi Monitor Pro ID',
                 icon: 'WifiMonitorPro.jpg',
-                desc: 'Pantau dan amankan jaringan WiFi Anda secara real-time. Fitur Premium meliputi: Deteksi Pencuri WiFi, Analisis Sinyal Detail, dan Pengalaman Bebas Iklan.',
+                desc: 'Pantau dan amankan jaringan WiFi Anda secara real-time. Bebas Iklan.',
                 email: 'premium@appwebiatech.com',
                 policy: 'Memerlukan lokasi untuk scan SSID.',
                 link: '#', 
@@ -640,7 +642,8 @@ const firebaseConfig = {
                 defaultDownloads: 0, 
                 btnText: 'Beli',
                 isPremium: true,
-                lastUpdated: '15 Desember 2025'
+                lastUpdated: '15 Desember 2025',
+                version: '1.0' // VERSI WIFI MONITOR
             }
         };
 
@@ -759,8 +762,9 @@ const firebaseConfig = {
             document.getElementById('detailEmail').href = 'mailto:' + data.email;
             document.getElementById('detailPolicy').innerText = data.policy;
             
-            // PERUBAHAN: Set tanggal update secara dinamis dari database
+            // PERUBAHAN: Set tanggal update dan versi secara dinamis
             document.getElementById('detailUpdateDate').innerText = data.lastUpdated || 'Belum diatur';
+            document.getElementById('detailVersion').innerText = data.version || '1.0.0';
 
             const currentDl = getDownloads(data.id);
             document.getElementById('detailDownloadCount').innerText = currentDl + '+';
