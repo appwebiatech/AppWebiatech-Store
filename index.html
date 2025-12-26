@@ -449,7 +449,7 @@
                 </div>
                 <div class="info-row">
                     <span class="info-label">Diupdate pada</span>
-                    <span class="info-value">Des 2024</span>
+                    <span class="info-value" id="detailUpdateDate">Memuat...</span>
                 </div>
                 <div style="margin-top:15px;">
                     <a href="#" id="detailEmail" class="contact-link"><i class="far fa-envelope"></i> email@example.com</a>
@@ -510,14 +510,15 @@
     <script>
         // --- KONFIGURASI FIREBASE ---
         // GANTI BAGIAN INI DENGAN DATA DARI FIREBASE CONSOLE ANDA
-        const firebaseConfig = {
-            apiKey: "API_KEY_ANDA_DISINI",
-            authDomain: "PROJECT_ID.firebaseapp.com",
-            projectId: "PROJECT_ID_ANDA",
-            storageBucket: "PROJECT_ID.appspot.com",
-            messagingSenderId: "SENDER_ID",
-            appId: "APP_ID"
-        };
+const firebaseConfig = {
+    apiKey: "AIzaSyA0TBdtRRWAtpiKlAtH_6O9BeUZzqO-dzs",
+    authDomain: "appwebiatech-store.firebaseapp.com",
+    projectId: "appwebiatech-store",
+    storageBucket: "appwebiatech-store.firebasestorage.app",
+    messagingSenderId: "832935810880",
+    appId: "1:832935810880:web:749fe7e64204394751cca5",
+    measurementId: "G-8R98K3KB2L"
+  };
 
         // Inisialisasi Firebase
         let db;
@@ -571,7 +572,7 @@
             const storeLink = "LINK_MEDIAFIRE_ANDA_DISINI"; 
             
             if(storeLink === "LINK_MEDIAFIRE_ANDA_DISINI") {
-                showToast("Link belum diatur di kode program.");
+                showToast("Aplikasi belum tersedia.");
                 return;
             }
 
@@ -582,59 +583,64 @@
             }, 800);
         }
 
-        // --- DATA APLIKASI (LAMA) ---
+        // --- DATA APLIKASI ---
+        // PERUBAHAN: Menambahkan property 'lastUpdated' untuk setiap item
         const appDB = {
             'zikirnur': {
                 id: 'zikirnur',
                 title: 'ZikirNur',
                 icon: 'ZikirNur.jpg',
-                desc: 'Aplikasi Islami terlengkap untuk menemani ibadah harian Anda.',
+                desc: 'Aplikasi islami lengkap dengan notifikasi Adzan, Dzikir Harian, Tasbih Digital, Arah Kiblat, & Al-Quran Offline.',
                 email: 'support@zikirnur.com',
                 policy: 'Hanya menggunakan lokasi untuk jadwal sholat.',
                 link: 'https://mediafire.com/file/3mfxhg5j6w0a8b7',
                 tags: ['popular', 'lifestyle'],
                 defaultDownloads: 0, 
                 btnText: 'Install',
-                isPremium: false
+                isPremium: false,
+                lastUpdated: '15 Januari 2025' // TANGGAL KHUSUS ZIKIR NUR
             },
             'kalkulator': {
                 id: 'kalkulator',
                 title: 'Kalkulator Pintar',
                 icon: 'Kalkulator.png',
-                desc: 'Alat bantu hitung serbaguna untuk pelajar dan profesional.',
+                desc: 'Aplikasi kalkulator pintar dengan antarmuka modern. Mendukung perhitungan aritmatika dasar, mode Ilmiah, dan Pengonversi satuan.',
                 email: 'tools@appwebiatech.com',
                 policy: 'Bekerja offline, tanpa tracking.',
                 link: 'https://mediafire.com/file/84gzenmyza0w4d3',
                 tags: ['popular', 'productivity'],
                 defaultDownloads: 0, 
                 btnText: 'Install',
-                isPremium: false
+                isPremium: false,
+                lastUpdated: '15 November 2025' // TANGGAL KHUSUS KALKULATOR
             },
             'smartdkm': {
                 id: 'smartdkm',
                 title: 'Smart DKM',
                 icon: 'SmartDKM.png',
-                desc: 'Sistem Manajemen Masjid berbasis Web & Android.',
+                desc: 'Smart DKM adalah aplikasi berbasis web (Web App) yang dirancang sebagai papan informasi digital (Digital Signage) dan manajemen administrasi untuk masjid. Aplikasi ini bersifat Hybrid (Online & Offline), artinya data disimpan secara lokal di perangkat (HP/Tablet/Smart TV) namun memiliki fitur Cloud Sync (menggunakan Firebase) agar admin dapat mengupdate data dari jarak jauh dan data tersebut otomatis berubah di layar masjid atau HP jamaah.',
                 email: 'dkm@appwebiatech.com',
                 policy: 'Data keuangan aman di server Firebase.',
                 link: 'https://mediafire.com/file/lq9jc3feplrfqvl',
                 tags: ['productivity'],
                 defaultDownloads: 0, 
                 btnText: 'Install',
-                isPremium: false
+                isPremium: false,
+                lastUpdated: '24 Desember 2025'
             },
             'wifimonitor': {
                 id: 'wifimonitor',
                 title: 'Wifi Monitor Pro ID',
                 icon: 'WifiMonitorPro.jpg',
-                desc: 'Versi Premium. Pantau pencuri bandwidth.',
+                desc: 'Pantau dan amankan jaringan WiFi Anda secara real-time. Fitur Premium meliputi: Deteksi Pencuri WiFi, Analisis Sinyal Detail, dan Pengalaman Bebas Iklan.',
                 email: 'premium@appwebiatech.com',
                 policy: 'Memerlukan lokasi untuk scan SSID.',
                 link: '#', 
                 tags: ['premium', 'productivity'],
                 defaultDownloads: 0, 
                 btnText: 'Beli',
-                isPremium: true
+                isPremium: true,
+                lastUpdated: '15 Desember 2025'
             }
         };
 
@@ -753,6 +759,9 @@
             document.getElementById('detailEmail').href = 'mailto:' + data.email;
             document.getElementById('detailPolicy').innerText = data.policy;
             
+            // PERUBAHAN: Set tanggal update secara dinamis dari database
+            document.getElementById('detailUpdateDate').innerText = data.lastUpdated || 'Belum diatur';
+
             const currentDl = getDownloads(data.id);
             document.getElementById('detailDownloadCount').innerText = currentDl + '+';
 
